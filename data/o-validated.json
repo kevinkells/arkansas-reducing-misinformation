@@ -1,0 +1,179 @@
+{
+  "root": {
+    "data": "arkansas-resilient-to-misinformation",
+    "children": [
+      {
+        "obstacle": {
+          "data": {
+            "title": "Access and Infrastructure",
+            "description": "Barriers related to physical access, technological infrastructure, financial capacity, and the presence of local facilitators."
+          },
+          "children": [
+            {
+              "obstacle": {
+                "data": {
+                  "title": "Digital Literacy Disparities",
+                  "description": "Limited access to devices, internet, and the skills to use them effectively."
+                }
+              }
+            },
+            {
+              "obstacle": {
+                "data": {
+                  "title": "Rural Infrastructure Deficits",
+                  "description": "Rural communities face challenges in broadband access, educational institutions, and transportation."
+                }
+              }
+            },
+            {
+              "obstacle": {
+                "data": {
+                  "title": "Limited Resources",
+                  "description": "Government and NGOs may not prioritize or fund media literacy initiatives adequately."
+                }
+              }
+            },
+            {
+              "obstacle": {
+                "data": {
+                  "title": "Language Barriers",
+                  "description": "Non-English speakers lack access to accurate, culturally appropriate, and multilingual content."
+                },
+                "children": [
+                  {
+                    "obstacle": {
+                      "data": {
+                        "title": "Lack of Trusted Local Facilitators",
+                        "description": "Communities lack credible local educators or mediators who can translate and contextualize information."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "obstacle": {
+          "data": {
+            "title": "Education and Policy",
+            "description": "System-level barriers in schools and leadership structures that prevent effective media literacy and misinformation resilience."
+          },
+          "children": [
+            {
+              "obstacle": {
+                "data": {
+                  "title": "Educational System Limitations",
+                  "description": "Curriculum and teacher training are inadequate for fostering critical digital and media literacy."
+                }
+              }
+            },
+            {
+              "obstacle": {
+                "data": {
+                  "title": "Influence of Local Leaders",
+                  "description": "Community leaders may spread misinformation due to lack of training or pressure to conform."
+                },
+                "children": [
+                  {
+                    "obstacle": {
+                      "data": {
+                        "title": "Curriculum Rigidity and Policy Vacuum",
+                        "description": "There are few state-level mandates or support for integrating media literacy into school systems."
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "obstacle": {
+                "data": {
+                  "title": "Absence of Local Prebunking Strategies",
+                  "description": "No locally adapted campaigns exist to proactively educate the public before misinformation spreads."
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "obstacle": {
+          "data": {
+            "title": "Culture and Psychosocial Dynamics",
+            "description": "Cultural norms and mental/emotional states that make communities more or less resilient to misinformation."
+          },
+          "children": [
+            {
+              "obstacle": {
+                "data": {
+                  "title": "Cultural Resistance to Change",
+                  "description": "Deeply rooted values and skepticism toward outside perspectives hinder adaptability."
+                }
+              }
+            },
+            {
+              "obstacle": {
+                "data": {
+                  "title": "Socioeconomic Challenges",
+                  "description": "Poverty, unemployment, and class divides can create grievances that misinformation exploits."
+                }
+              }
+            },
+            {
+              "obstacle": {
+                "data": {
+                  "title": "Political Polarization",
+                  "description": "Partisan identity and echo chambers reinforce misinformation acceptance."
+                }
+              }
+            },
+            {
+              "obstacle": {
+                "data": {
+                  "title": "Psychosocial Drivers of Susceptibility",
+                  "description": "Stress, loneliness, identity threats, and social fragmentation increase misinformation vulnerability."
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "obstacle": {
+          "data": {
+            "title": "Information Ecosystem and Trust",
+            "description": "Issues in the media landscape and local communication structures that hinder access to accurate information."
+          },
+          "children": [
+            {
+              "obstacle": {
+                "data": {
+                  "title": "Media Trust Issues",
+                  "description": "Widespread skepticism toward traditional media reduces information credibility."
+                }
+              }
+            },
+            {
+              "obstacle": {
+                "data": {
+                  "title": "Echo Chambers and Algorithmic Bias",
+                  "description": "Platforms reinforce existing beliefs, preventing exposure to counterpoints."
+                }
+              }
+            },
+            {
+              "obstacle": {
+                "data": {
+                  "title": "No Rapid Local Fact-Check Infrastructure",
+                  "description": "Communities lack responsive, locally grounded mechanisms to verify circulating claims quickly."
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
