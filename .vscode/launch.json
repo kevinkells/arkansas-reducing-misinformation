@@ -5,15 +5,31 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "FLOW",
+            "name": "GOSR: g2o",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal",
-            "justMyCode": true,
+            "program": "${workspaceFolder}/gosr/main/g2o.py",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            },
             "args": [
-                "projects/flow"
-            ]
+                "data"
+            ] // or the correct path if needed
         },
+        {
+            "name": "GOSR: o2s",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/gosr/main/o2s.py",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "GOSR: s2r",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/gosr/main/s2r.py",
+            "cwd": "${workspaceFolder}"
+        }
     ]
 }

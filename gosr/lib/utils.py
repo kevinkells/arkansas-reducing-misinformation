@@ -11,6 +11,7 @@ import time
 import requests
 import re
 import hashlib
+import yaml
 
 def setup_openai():
     """
@@ -256,8 +257,6 @@ def print_tree(identifier, indent=0):
 
 cache_dirty = False
 
-from openai.types.chat import ChatCompletionMessageParam
-
 def call_gpt4(msg_text, use_cache=True):
     """
     Call the OpenAI GPT-4 API with the given message text.
@@ -357,3 +356,106 @@ def save_tree(filename="o.json"):
             json.dump(j, f)
     except Exception as e:
         logger.error(f"Failed to save tree to {filename}: {e}")
+
+REQUIRED_FIELDS = {
+    "root_node_name": "Root node name for the project (string)",
+    "word_doc_title": "Title for the Word document (string)",
+    "future_picture": "A multi-line string describing the desired future state",
+    "locality": "The locality or region (string)",
+    "country": "The country (string)",
+    "max_resource_loops": "Maximum number of resource loops (integer)"
+}
+
+TEMPLATE = {
+    "root_node_name": "arkansas-resilient-to-misinformation",
+    "word_doc_title": "arkansas-resilient-to-misinformation",
+    "future_picture": (
+        "Arkansans and their communities are resilient to misinformation and manipulative\n"
+        "influence campaigns that circulate in the information environment. \n"
+        "Individuals are not misled into harmful actions or false beliefs, \n"
+        "and they make sound, independent decisions with clarity and confidence. \n"
+        "The social fabric is grounded in trust — not in any one source, \n"
+        "but in the collective strength of relationships, shared understanding, \n"
+        "and a culture of critical reflection. \n"
+        "In this environment, bad-faith actors seeking to confuse, divide, \n"
+        "or destabilize the public consistently fail. \n"
+        "Over time, those behind misinformation campaigns have learned to bypass Arkansas entirely,\n"
+        "recognizing that its people are simply not a useful audience for manipulation."
+    ),
+    "locality": "Arkansas",
+    "country": "USA",
+    "max_resource_loops": 1
+}
+
+def explain_config_requirements():
+    print("Your config.yaml must include the following fields:")
+    for key, desc in REQUIRED_FIELDS.items():
+        print(f"  - {key}: {desc}")
+    print("\nExample template:\n")
+    print(yaml.dump(TEMPLATE, sort_keys=False, allow_unicode=True))
+
+def load_and_validate_config(path, exit_on_error=True):
+    """
+    Loads and validates the config.yaml file.
+    Prints missing fields and a template if validation fails.
+    Returns the loaded config dict if valid, otherwise None.
+    """
+    if not os.path.exists(path):
+        print(f"Config file '{path}' not found.")
+        explain_config_requirements()
+        if exit_on_error:
+            sys.exit(1)
+        return None
+    with open(path, 'r') as f:
+        try:
+            config = yaml.safe_load(f)
+        except yaml.YAMLError as e:
+            print(f"YAML parsing error: {e}")
+            if exit_on_error:
+                sys.exit(1)
+            return None
+    missing = [k for k in REQUIRED_FIELDS if k not in config]
+    if missing:
+        print("Missing required fields in config.yaml:")
+        for k in missing:
+            print(f"  - {k}: {REQUIRED_FIELDS[k]}")
+        print("\nPlease update your config.yaml. Here is a template:\n")
+        print(yaml.dump(TEMPLATE, sort_keys=False, allow_unicode=True))
+        if exit_on_error:
+            sys.exit(1)
+        return None
+
+    # Type checks
+    if not isinstance(config["root_node_name"], str):
+        print("root_node_name must be a string.")
+        if exit_on_error:
+            sys.exit(1)
+        return None
+    if not isinstance(config["word_doc_title"], str):
+        print("word_doc_title must be a string.")
+        if exit_on_error:
+            sys.exit(1)
+        return None
+    if not isinstance(config["future_picture"], str):
+        print("future_picture must be a string (multi-line allowed).")
+        if exit_on_error:
+            sys.exit(1)
+        return None
+    if not isinstance(config["locality"], str):
+        print("locality must be a string.")
+        if exit_on_error:
+            sys.exit(1)
+        return None
+    if not isinstance(config["country"], str):
+        print("country must be a string.")
+        if exit_on_error:
+            sys.exit(1)
+        return None
+    if not isinstance(config["max_resource_loops"], int):
+        print("max_resource_loops must be an integer.")
+        if exit_on_error:
+            sys.exit(1)
+        return None
+
+    print("config.yaml is valid!")
+    return config

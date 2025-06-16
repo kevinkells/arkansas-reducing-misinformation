@@ -62,7 +62,73 @@ major_theme_obstacles:
   - "High food prices"
 """
 
+"""
+g2o.py
+
+GOSR Workflow Phase: Goal → Obstacles
+
+This script takes a single, user-defined Goal and generates a structured list of Obstacles
+that may prevent achieving that goal. It is the first step in the GOSR (Goal-Obstacles-Solutions-Resources) pipeline.
+
+Typical usage:
+    python g2o.py <config-directory>
+
+Inputs:
+    - A directory containing a config.yaml file with the required parameters.
+
+Outputs:
+    - A structured JSON file listing obstacles related to the goal.
+
+Reference: See the GOSR process at
+https://docs.google.com/presentation/d/1wLkb61LRHV_3o0JqQnr0yeqTPRzzKiLhw0elX2_o6M8/edit?slide=id.g1ff3a93b48e_0_5
+"""
+
+"""
+Configuration (config.yaml)
+---------------------------
+The following parameters are required in config.yaml for g2o.py:
+
+- future_picture (str): 
+    The main goal or vision statement to analyze.
+    This is the central objective for which obstacles will be generated.
+
+- root_node_name (str): 
+    The label for the root node in the tree (usually the goal itself).
+    This will be used as the root node's name in the obstacle tree structure.
+
+- root_question (str): 
+    A prompt or question to initiate obstacle generation.
+    This is sent to the language model to generate the initial list of obstacles.
+
+- locality (str): 
+    The city, region, or locality for context.
+    This provides local context to the language model for more relevant obstacles.
+
+- country (str): 
+    The country for context.
+    This further contextualizes the goal and obstacles for the language model.
+
+The following parameter is optional:
+- major_theme_obstacles (list of str): 
+    Known obstacles from the local community, included in the prompt for context if present.
+    If provided, these are shared with the language model to inform or refine its generated list of obstacles.
+
+Example config.yaml:
+--------------------
+future_picture: "Increase community access to healthy food"
+root_node_name: "Access to Healthy Food"
+root_question: "What are the main obstacles to increasing community access to healthy food?"
+locality: "Springfield"
+country: "USA"
+major_theme_obstacles:
+  - "Lack of grocery stores"
+  - "Limited public transportation"
+  - "High food prices"
+"""
+
 import os
+import sys
+
 try:
     from dotenv import load_dotenv
     load_dotenv()
@@ -75,14 +141,13 @@ from treelib.node import Node
 import json
 import logging
 import logging.handlers
-import sys
 import time
 import requests
 import yaml
 import re
 from gosr.lib.utils import (
     tree, call_gpt4, insert_nodes, setup_openai, setup_logging,
-    normalize_data, cache4
+    normalize_data, cache4, load_and_validate_config
 )
 
 # Use the shared OpenAI setup function
@@ -239,9 +304,9 @@ def main():
 
     # Set the working path from the command-line argument
     path = sys.argv[1]
-    # Load configuration from config.yaml
-    with open(os.path.join(path, "config.yaml"), "r", encoding="utf-8") as file:
-        config = yaml.safe_load(file)
+    config_path = os.path.join(path, "config.yaml")
+    # Validate config.yaml at the start of your script
+    config = load_and_validate_config(config_path)
 
     # Create the root node in the tree using the configured root node name
     tree.create_node(data=config["root_node_name"], identifier="root", tag="root")
