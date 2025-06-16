@@ -23,3 +23,8 @@ future_picture: >-
 locality: Arkansas
 country: USA
 max_resource_loops: 1
+
+obstacle_validate:
+  Is there anyway we can categorize these (taking into account the sub-obstacles, too) into 3, 4 or 5 main themes?
+  Now look up on the web existing solutions to this problem elsewhere that have been successful, and interpret those solutions as solutions to obstacles, obstacles that may be missing or not clearly articulated in our list. Add these obstacles to the list, then recategorize.
+  Can you produce another o.json in a JSON code block to take these into account? Now we have sub-sub-obstacles, right? Please do the structuring correctly
