@@ -22,7 +22,14 @@
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/gosr/main/o2s.py",
-            "cwd": "${workspaceFolder}"
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            },
+            "args": [
+                "data"
+            ] // or the correct path if needed
+
         },
         {
             "name": "GOSR: s2r",
