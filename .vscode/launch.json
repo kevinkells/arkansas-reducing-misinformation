@@ -36,7 +36,13 @@
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/gosr/main/s2r.py",
-            "cwd": "${workspaceFolder}"
+            "cwd": "${workspaceFolder}",
+                        "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            },
+            "args": [
+                "data"
+            ] // or the correct path if needed
         }
     ]
 }
